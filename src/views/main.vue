@@ -24,7 +24,9 @@
 import navbar from '../components/navbar';
 import gohome from '../components/gohome';
 import pictures from '../components/pictures';
+import {fetch} from '../utils/fetch';
 export default {
+    
     data(){
         return {
             pages:{},
@@ -33,6 +35,7 @@ export default {
         }
     },
     created(){
+        console.log(global.a);
         this.pages = {...this.$route.params};
         this.navs = {
             base:'/junior',
@@ -41,7 +44,7 @@ export default {
                 link:'',
             },{
                 name:'地球与地图',
-                link:'123',
+                link:'s10001',
             },{
                 name:'地图',
                 link:'333',

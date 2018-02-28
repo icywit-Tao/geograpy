@@ -1,13 +1,13 @@
 <template>
     <div class="category-container">
         <tree v-if="category" :mask="1" :active="active":tree="tree" :toggle="toggle" :dictionary="category" :addSession="addSession" :delSession="delSession"></tree>
-        <addform :isShow="isShow" :addform="addform"></addform>
+        <addform :isShow="isShow" :addform="addform" :formtype="formtype"></addform>
     </div>
 </template>
 <script>
 import addform from '../components/form';
 import tree from '../components/tree';
-import {fetch} from '../utils/fetch';
+import {fetch,fetchdata} from '../utils/fetch';
 export default {
     data(){
         return {
@@ -15,6 +15,7 @@ export default {
             tree:'root',
             active:'',
             isShow:'',
+            formtype:''
         }
     },
     created(){
@@ -27,8 +28,9 @@ export default {
         
     },
     methods:{
-        addSession(id){
+        addSession(id,type){
             this.isShow = id;
+            this.formtype = type;
         },
         delSession(id){
             fetch('/api/delSession',null,{
@@ -41,10 +43,20 @@ export default {
             if(isShow && form.name){
                 fetch('/api/addSession',null,{
                     parent:this.isShow,
-                    name:form.name
+                    name:form.name,
+                    childrentype:form.sub
                 }).then(res=>{
                     this.category = res;
                 })
+            }else if(isShow === 2){
+                let data = new FormData();
+                for(let i=0, len=form.files.length;i<len;i++){
+                    data.append(`pic${i}`,form.files[i]);
+                    data.append(`descpic${i}`,form.files[i].desc);
+                }
+                data.append('parent',this.isShow);
+                data.append('type',form.type);
+                fetchdata('/api/addResource',null,data)
             }
             this.isShow =false;
         },

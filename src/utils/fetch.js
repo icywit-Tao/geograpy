@@ -26,3 +26,14 @@ export function fetch(url, params={}, data={}) {
         data: translateParam(data)
     }).then(respone => respone.data)
 }
+export function fetchdata(url, params={}, data={}) {
+    return axios({
+        method: 'post',
+        url: url,
+        headers: {
+            'Content-Type': 'charset=utf-8'
+        },
+        params: params,
+        data: data
+    }).then(respone => respone.data)
+}

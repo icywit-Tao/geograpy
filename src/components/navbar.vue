@@ -1,10 +1,10 @@
 <template>
     <div class="nav-container">
         <span>您的位置：</span>
-        <template v-if="navs.list.length">
-            <template v-for="(nav,index) in navs.list">
+        <template v-if="navs.length">
+            <template v-for="(nav,index) in navs" >
                 <template v-if="index">></template>
-                <router-link :to="`${navs.base}/${nav.link}`">{{nav.name}}</router-link>
+                <router-link :to="nav.link">{{nav.name}}</router-link>
             </template>
         </template>
     </div>

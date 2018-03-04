@@ -5,6 +5,9 @@
             <div>Geography teaching image library of Nanjing Normal University</div>
         </div>
         <div class="content">
+            <div class="left-wrap">
+                <left :dictionary="category" :tree="tree" :active="active"></left>
+            </div>
             <div class="nav-wrap">
                 <navbar :navs="navs"></navbar>
             </div>
@@ -23,10 +26,10 @@
 <script>
 import navbar from '../components/navbar';
 import gohome from '../components/gohome';
+import left from '../components/left.vue';
 import pictures from '../components/pictures';
 import {fetch} from '../utils/fetch';
 export default {
-    
     data(){
         return {
             pages:{},
@@ -35,107 +38,113 @@ export default {
         }
     },
     created(){
-        console.log(global.a);
-        this.pages = {...this.$route.params};
-        this.navs = {
-            base:'/junior',
-            list:[{
-                name:'初中部分',
-                link:'',
-            },{
-                name:'地球与地图',
-                link:'s10001',
-            },{
-                name:'地图',
-                link:'333',
-            }]
+        this.init();
+        this.$watch('$route',(to,from)=>{
+            this.init();
+        })
+    },
+    methods:{
+        init(){
+            this.navs = this.$route.meta.navs;
+            this.pics=[
+                {
+                    src:'../assets/001.jpg',
+                    desc:'001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg'
+                },{
+                    src:'../assets/006.jpg',
+                    desc:'006.jpg006.jpg006.jpg006.jpg006.jpg'
+                },{
+                    src:'../assets/008.jpg',
+                    desc:'008.jpg'
+                },{
+                    src:'../assets/009.jpg',
+                    desc:'009.jpg'
+                },{
+                    src:'../assets/011.jpg',
+                    desc:'011.jpg'
+                },{
+                    src:'../assets/017.jpg',
+                    desc:'017.jpg'
+                },{
+                    src:'../assets/043.jpg',
+                    desc:'043.jpg'
+                },{
+                    src:'../assets/048.jpg',
+                    desc:'048.jpg'
+                },{
+                    src:'../assets/049.jpg',
+                    desc:'049.jpg'
+                },{
+                    src:'../assets/050.jpg',
+                    desc:'050.jpg'
+                },{
+                    src:'../assets/051.jpg',
+                    desc:'051.jpg'
+                },{
+                    src:'../assets/057.jpg',
+                    desc:'057.jpg'
+                },{
+                    src:'../assets/061.jpg',
+                    desc:'061.jpg'
+                },{
+                    src:'../assets/075.jpg',
+                    desc:'075.jpg'
+                },{
+                    src:'../assets/075.jpg',
+                    desc:'075.jpg'
+                },{
+                    src:'../assets/075.jpg',
+                    desc:'075.jpg'
+                },{
+                    src:'../assets/075.jpg',
+                    desc:'075.jpg'
+                },{
+                    src:'../assets/075.jpg',
+                    desc:'075.jpg'
+                },{
+                    src:'../assets/075.jpg',
+                    desc:'075.jpg'
+                },{
+                    src:'../assets/075.jpg',
+                    desc:'075.jpg'
+                },{
+                    src:'../assets/075.jpg',
+                    desc:'075.jpg'
+                },{
+                    src:'../assets/075.jpg',
+                    desc:'075.jpg'
+                },{
+                    src:'../assets/075.jpg',
+                    desc:'075.jpg'
+                },{
+                    src:'../assets/075.jpg',
+                    desc:'075.jpg'
+                },{
+                    src:'../assets/075.jpg',
+                    desc:'075.jpg'
+                },{
+                    src:'../assets/075.jpg',
+                    desc:'075.jpg'
+                },
+            ]
         }
-        this.pics=[
-            {
-                src:'../assets/001.jpg',
-                desc:'001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg'
-            },{
-                src:'../assets/006.jpg',
-                desc:'006.jpg006.jpg006.jpg006.jpg006.jpg'
-            },{
-                src:'../assets/008.jpg',
-                desc:'008.jpg'
-            },{
-                src:'../assets/009.jpg',
-                desc:'009.jpg'
-            },{
-                src:'../assets/011.jpg',
-                desc:'011.jpg'
-            },{
-                src:'../assets/017.jpg',
-                desc:'017.jpg'
-            },{
-                src:'../assets/043.jpg',
-                desc:'043.jpg'
-            },{
-                src:'../assets/048.jpg',
-                desc:'048.jpg'
-            },{
-                src:'../assets/049.jpg',
-                desc:'049.jpg'
-            },{
-                src:'../assets/050.jpg',
-                desc:'050.jpg'
-            },{
-                src:'../assets/051.jpg',
-                desc:'051.jpg'
-            },{
-                src:'../assets/057.jpg',
-                desc:'057.jpg'
-            },{
-                src:'../assets/061.jpg',
-                desc:'061.jpg'
-            },{
-                src:'../assets/075.jpg',
-                desc:'075.jpg'
-            },{
-                src:'../assets/075.jpg',
-                desc:'075.jpg'
-            },{
-                src:'../assets/075.jpg',
-                desc:'075.jpg'
-            },{
-                src:'../assets/075.jpg',
-                desc:'075.jpg'
-            },{
-                src:'../assets/075.jpg',
-                desc:'075.jpg'
-            },{
-                src:'../assets/075.jpg',
-                desc:'075.jpg'
-            },{
-                src:'../assets/075.jpg',
-                desc:'075.jpg'
-            },{
-                src:'../assets/075.jpg',
-                desc:'075.jpg'
-            },{
-                src:'../assets/075.jpg',
-                desc:'075.jpg'
-            },{
-                src:'../assets/075.jpg',
-                desc:'075.jpg'
-            },{
-                src:'../assets/075.jpg',
-                desc:'075.jpg'
-            },{
-                src:'../assets/075.jpg',
-                desc:'075.jpg'
-            },{
-                src:'../assets/075.jpg',
-                desc:'075.jpg'
-            },
-        ]
+    },
+    computed:{
+        category(){
+            return global.category;
+        },
+        active(){
+            return this.$route.params.session||this.$route.params.grade
+        },
+        tree(){
+            return this.$route.params.grade
+        }
     },
     components:{
         navbar,
         gohome,
-        pictures
+        pictures,
+        left
     }
 }
 </script>

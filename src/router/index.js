@@ -63,12 +63,14 @@ router.beforeEach((to,from,next)=>{
         if(/^(junior|senior)$/.test(grade)&&(!session||global.category[session])){
           let navs = [];
           let temp = session||grade;
+          global.active =[];
           while(temp && temp !== 'root'){
             let location =global.category[temp];
             navs.unshift({
               name: location.name,
               link :location.link
             });
+            global.active.push(temp);
             temp = location.parent;
           }
           to.meta.navs = navs;

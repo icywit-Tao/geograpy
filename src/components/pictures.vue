@@ -2,8 +2,8 @@
     <div class="pic-container">
         <template v-if="total">
             <ul class="pic-list">
-                <li v-for="(pic,index) in pics" @click="showPhoto(index)">
-                    <img :src="pic.src" alt=""/>
+                <li v-for="(pic,index) in pics.list" @click="showPhoto(index)">
+                    <img :src="path(pic.file)" alt=""/>
                     <p>{{pic.desc}}</p>
                 </li>
             </ul>
@@ -11,9 +11,9 @@
                 <img src="../assets/icon_left.png" alt="" class="prev" @click="showPhoto(0,-1)">
                 <div class="photo-wrap">
                     <div class="close" @click="showPhoto(-1)">
-                        <img src="../assets/icon_close.png" alt="">
+                        <img class="icon_close" src="../assets/icon_close.png" alt="">
                     </div>
-                    <img :src="photo&&photo.src" alt="">
+                    <img class="show-img" :src="photo && path(photo.file)" alt="">
                     <div class="desc-wrap">
                         <p>{{photo&&photo.desc}}</p>
                         <div class="count">{{picnum}}/{{total}}</div>
@@ -41,10 +41,10 @@ export default {
             return this.active===-1;
         },
         total(){
-            return this.pics.length;
+            return this.pics.list.length;
         },
         photo(){
-            return this.pics[this.active];
+            return this.pics.list[this.active];
         },
         picnum(){
             return this.active+1
@@ -53,6 +53,9 @@ export default {
     methods:{
         showPhoto(index,add){
             this.active = add?(this.total+add+this.active)%this.total:index;
+        },
+        path(file){
+            return file?`/dist/pics/${this.pics.id}/${file}`:''
         }
     }
 }
@@ -62,28 +65,30 @@ export default {
         .pic-list{
             width:1000px;
             padding:30px;
+            overflow: scroll;
+            margin-top: -20px;
             li{
                 position: relative;
                 width:188px;
-                height:188px;
-                margin:10px 5px;
+                height:150px;
+                margin:8px 5px;
                 float: left;
                 img{
                     position: absolute;
-                    left: 21px;
+                    left: 28px;
                     top:0;
-                    width:145px;
-                    height:145px;
+                    width:125px;
+                    height:125px;
                 }
                 p{
                     width:180px;
                     position: absolute;
                     left:4px;
-                    top:153px;
+                    top:128px;
                     text-align: center;
-                    font-size: 19px;
-                    line-height: 21px;
-                    height:43px;
+                    font-size: 16px;
+                    line-height: 19px;
+                    height:38px;
                     overflow : hidden;
                     text-overflow: ellipsis;
                     word-break: break-all;
@@ -101,7 +106,7 @@ export default {
             right:0;
             bottom:0;
             z-index:100;
-            background-color: rgba(0,0,0,.2);
+            background-color: rgba(0,0,0,.3);
             &.hide{
                 display: none;
             }
@@ -110,9 +115,9 @@ export default {
             position: fixed;
             top:0;
             bottom:0;
-            width:830px;
+            width:600px;
             left:50%;
-            margin-left:-315px;
+            margin-left:-250px;
             background-color: #000;
             overflow: hidden;
             .close{
@@ -120,16 +125,21 @@ export default {
                 height:63px;
                 overflow: hidden;
                 background-color: #929292;
-                border-radius: 50%;position: absolute;
+                border-radius: 50%;
+                position: absolute;
                 top:5px;
                 right:5px;
+                .icon_close{
+                    display: block;
+                }
             }
-            img{
-
+            .show-img{
+                display: block;
+                margin:80px 0;
             }
             .desc-wrap{
                 position: absolute;
-                width:830px;
+                width:600px;
                 box-sizing: border-box;
                 bottom:20px;
                 height:160px;
@@ -154,13 +164,13 @@ export default {
             height:94px;
             position: fixed;
             top:50%;
-            margin-top:-47px;
+            margin-top:-30px;
             left:50%;
             &.prev{
-                margin-left: -535px;
+                margin-left: -470px;
             }
             &.next{
-                margin-left:630px;
+                margin-left:450px;
             }
         }
     }

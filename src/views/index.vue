@@ -31,65 +31,72 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+    @import '../less/common.less';
     .index-container{
         width:1440px;
+        height:100%;
         position: absolute;
-        top:0;
+        top: 0;
         left:50%;
         margin-left: -720px;
         .pic-earth{
-            width:563px;
-            height:261px;
+            width:3rem;
+            height:1.5rem*@diff;
             position: absolute;
-            top:110px;
+            top:.6rem*@diff2;
             left:50%;
-            margin-left:-244px;
+            margin-left:-1.4rem;
         }
         .title{
-            width:1238px;
-            height:82px;
+            width:7.5rem;
+            height:.82rem*@diff;
             position: absolute;
-            top:350px;
-            left:101px;
+            top:1.7rem*@diff;
+            left:50%;
+            margin-left:-3.75rem;
         }
         .subtitle{
             position: absolute;
-            font-size: 35px;
+            font-size: .3rem*@diff2;
             text-align: center;
-            width:1440px;
-            top:440px;
+            width:100%;
+            top:2.6rem*@diff;
         }
         ul{
             position: absolute;
-            top:537px;
+            top:3.11rem*@diff;
+            width:3.5rem;
+            left:50%;
+            margin-left: -1.74rem;
             li{
-                height:100px; 
-                margin:29px 0;
-                width:1440px;
-                position: relative;
+                height:.5rem; 
+                margin:.17rem 0;
                 text-align: center;
+                position: relative;
                 &:before{
                     content:'';
                     position: absolute;
-                    width:120px;
-                    height:120px;
-                    top:-10px;
-                    left:430px;
+                    width:.56rem;
+                    height:.6rem;
+                    top:-.10rem;
+                    left:.2rem;
                     background-size: 100%;
                 }
                 .link{
-                    display: inline-block;
-                    width:291px;
-                    height:100px;
-                    border-radius:50px;
+                    margin-left:.9rem;
+                    display: block;
+                    width:1.7rem;
+                    height:.5rem*@diff;
+                    border-radius:.25rem*@diff;
                     background-color:#000;
                     position: relative;
                     left:20px;
                     img{
-                        position: relative;
-                        top:10px;
-                        width:290px;
-                        height:80px;
+                        position: absolute;
+                        left:0;
+                        top:0;
+                        width:1.7rem;
+                        height:.5rem*@diff;
                     }
                 }
                 &.junior{
@@ -102,8 +109,7 @@ export default {
                         background-image: url('../assets/icon_female.png');
                     }
                     img{
-                        top:10px;
-                        width:310px;
+                        width:1.8rem;
                     }
                 }
             }

@@ -83,5 +83,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-    
+    .category-container{
+        height:100%;
+        font-size: 16px;
+        overflow: scroll;
+    }
 </style>

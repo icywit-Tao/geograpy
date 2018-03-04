@@ -50,7 +50,8 @@ export default {
         padding-left: 10px;
     }
     .pic-wrap{
-        background-color: #eee;
+        float: left;
+        background-color: #ccc;
         .upload-pic{
             width:100px;
             height:100px;

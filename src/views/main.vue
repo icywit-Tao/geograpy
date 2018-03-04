@@ -6,14 +6,20 @@
         </div>
         <div class="content">
             <div class="left-wrap">
-                <left :dictionary="category" :tree="tree" :active="active"></left>
+                <div class="left-content">
+                    <left :dictionary="category" :tree="tree" :active="active"></left>
+                </div>
+                
             </div>
             <div class="nav-wrap">
                 <navbar :navs="navs"></navbar>
             </div>
-            <div class="pic-wrap">
-                <pictures :pics="pics"></pictures>
+
+            <div class="pic-wrap" >
+                <pictures :pics="pics" v-if="lastNode"></pictures>
+                <img class="nothing" src="../assets/nothing.png" alt="" v-else>
             </div>
+            
             
             
         </div>
@@ -34,7 +40,9 @@ export default {
         return {
             pages:{},
             navs:[],
-            pics:[],
+            pics:{},
+            active:[],
+            lastNode:''
         }
     },
     created(){
@@ -46,98 +54,26 @@ export default {
     methods:{
         init(){
             this.navs = this.$route.meta.navs;
-            this.pics=[
-                {
-                    src:'../assets/001.jpg',
-                    desc:'001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg001.jpg'
-                },{
-                    src:'../assets/006.jpg',
-                    desc:'006.jpg006.jpg006.jpg006.jpg006.jpg'
-                },{
-                    src:'../assets/008.jpg',
-                    desc:'008.jpg'
-                },{
-                    src:'../assets/009.jpg',
-                    desc:'009.jpg'
-                },{
-                    src:'../assets/011.jpg',
-                    desc:'011.jpg'
-                },{
-                    src:'../assets/017.jpg',
-                    desc:'017.jpg'
-                },{
-                    src:'../assets/043.jpg',
-                    desc:'043.jpg'
-                },{
-                    src:'../assets/048.jpg',
-                    desc:'048.jpg'
-                },{
-                    src:'../assets/049.jpg',
-                    desc:'049.jpg'
-                },{
-                    src:'../assets/050.jpg',
-                    desc:'050.jpg'
-                },{
-                    src:'../assets/051.jpg',
-                    desc:'051.jpg'
-                },{
-                    src:'../assets/057.jpg',
-                    desc:'057.jpg'
-                },{
-                    src:'../assets/061.jpg',
-                    desc:'061.jpg'
-                },{
-                    src:'../assets/075.jpg',
-                    desc:'075.jpg'
-                },{
-                    src:'../assets/075.jpg',
-                    desc:'075.jpg'
-                },{
-                    src:'../assets/075.jpg',
-                    desc:'075.jpg'
-                },{
-                    src:'../assets/075.jpg',
-                    desc:'075.jpg'
-                },{
-                    src:'../assets/075.jpg',
-                    desc:'075.jpg'
-                },{
-                    src:'../assets/075.jpg',
-                    desc:'075.jpg'
-                },{
-                    src:'../assets/075.jpg',
-                    desc:'075.jpg'
-                },{
-                    src:'../assets/075.jpg',
-                    desc:'075.jpg'
-                },{
-                    src:'../assets/075.jpg',
-                    desc:'075.jpg'
-                },{
-                    src:'../assets/075.jpg',
-                    desc:'075.jpg'
-                },{
-                    src:'../assets/075.jpg',
-                    desc:'075.jpg'
-                },{
-                    src:'../assets/075.jpg',
-                    desc:'075.jpg'
-                },{
-                    src:'../assets/075.jpg',
-                    desc:'075.jpg'
-                },
-            ]
+            this.active =global.active;
+            this.lastNode=this.last
+            this.pics=this.picInfo;
         }
     },
     computed:{
         category(){
             return global.category;
         },
-        active(){
-            return this.$route.params.session||this.$route.params.grade
-        },
         tree(){
             return this.$route.params.grade
+        },
+        last(){
+            return this.category[this.active[0]].childrentype !=='1'
+        },
+        picInfo(){ 
+            return {
+                id:this.active[0],
+                list:this.category[this.active[0]].children
+            };
         }
     },
     components:{
@@ -149,12 +85,13 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+    @import '../less/common.less';
     .main-container{
         position: relative;
         .top-container{
             width:100%;
-            height:175px;
-            background-color:rgba(0,0,0,.58);
+            height:1rem*@diff;
+            background-color:rgba(0,0,0,.34);
             border-bottom: 6px solid #000;
             position: relative;
             img{
@@ -169,24 +106,51 @@ export default {
                 position: absolute;
                 left:45px;
                 bottom: 10px;
+
             }
         }
         .content{
             border-top:3px solid #000;
             margin-top: 8px;
-            padding-left:550px;
+            position: relative;
+            .left-wrap{
+                position: absolute;
+                width:1.3rem;
+                height:4rem;
+                background-color:rgba(0,0,0,.34);
+                left:0;
+                top:0;
+                .left-content{
+                    padding: 10px 0;
+                    height:3rem;
+                    overflow: scroll;
+                }
+            }
             .nav-wrap{
-
+                position: absolute;
+                left:1.53rem;
+                top:.08rem;
             }
             .pic-wrap{
-                height:650px;
-                overflow-y:scroll; 
+                position: absolute;
+                left:1.53rem;
+                top:.32rem;
+                height:3rem;
+                overflow-y:scroll;
+                border:1px solid #000;
+                width:6rem;
+                .nothing{
+                    display: block;
+                    margin: .2rem 0 0 1.2rem;
+                    width:4rem;
+                    height:2.8rem;
+                }
             }
         }
         .gohome-wrap{
             position: fixed;
-            right:50px;
-            bottom:50px;
+            right:.25rem;
+            bottom:.25rem*@diff;
         }
     }
 </style>

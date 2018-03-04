@@ -80,8 +80,11 @@ html,body{
     background: url('./assets/bg.jpeg') no-repeat;
     background-size:cover;
     height:100%;
+    overflow: hidden;
 }
 #app {
+  width:100%;
+  height:100%;
   position: relative;
 }
 </style>

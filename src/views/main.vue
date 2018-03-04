@@ -137,7 +137,6 @@ export default {
                 top:.32rem;
                 height:3rem;
                 overflow-y:scroll;
-                border:1px solid #000;
                 width:6rem;
                 .nothing{
                     display: block;

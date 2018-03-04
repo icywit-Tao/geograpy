@@ -69,7 +69,7 @@ export default {
     }
 }
 </script>
-<style lang="less">
+<style lang="less" scoped>
     .mask{
         position: fixed;
         top:0;

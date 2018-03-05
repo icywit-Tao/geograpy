@@ -17,8 +17,8 @@ export default {
             active:'',
             isShow:'',
             formtype:'',
-            width,
-            height
+            width:'',
+            height:''
         }
     },
     created(){
@@ -27,7 +27,7 @@ export default {
             this.category = res;
         })
         this.width = document.documentElement.clientWidth;
-        this.height=document.documentElement.clientHeight;
+        this.height = document.documentElement.clientHeight;
     },
     computed:{
         

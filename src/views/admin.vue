@@ -2,6 +2,7 @@
     <div class="category-container">
         <tree v-if="category" :mask="1" :active="active":tree="tree" :toggle="toggle" :dictionary="category" :addSession="addSession" :delSession="delSession"></tree>
         <addform :isShow="isShow" :addform="addform" :formtype="formtype"></addform>
+        <div class="width-height">{{width}}*{{height}}</div>
     </div>
 </template>
 <script>
@@ -15,7 +16,9 @@ export default {
             tree:'root',
             active:'',
             isShow:'',
-            formtype:''
+            formtype:'',
+            width,
+            height
         }
     },
     created(){
@@ -23,6 +26,8 @@ export default {
             console.log(res);
             this.category = res;
         })
+        this.width = document.documentElement.clientWidth;
+        this.height=document.documentElement.clientHeight;
     },
     computed:{
         
@@ -87,5 +92,10 @@ export default {
         height:100%;
         font-size: 16px;
         overflow: scroll;
+    }
+    .width-height{
+        position: fixed;
+        top:80px;
+        right:50px;
     }
 </style>

@@ -62,6 +62,7 @@ export default {
 </script>
 <style lang="less" scoped>
     .pic-container{
+        overflow: hidden;
         .pic-list{
             width:1000px;
             padding:30px;
@@ -114,9 +115,9 @@ export default {
             position: fixed;
             top:0;
             bottom:0;
-            width:600px;
+            width:700px;
             left:50%;
-            margin-left:-250px;
+            margin-left:-350px;
             background-color: #000;
             overflow: hidden;
             .close{
@@ -134,20 +135,23 @@ export default {
             }
             .show-img{
                 display: block;
-                margin:80px 0;
+                width:calc(100% - 120px);
+                height:calc(100% - 120px);
+                margin:60px  0 0 60px;
             }
             .desc-wrap{
                 position: absolute;
-                width:600px;
+                width:700px;
                 box-sizing: border-box;
-                bottom:20px;
-                height:160px;
+                bottom:0;
+                height:180px;
                 z-index:102;
                 padding: 0 20px;
                 font-size: 32px;
                 color: #fff;
                 line-height: 40px;
                 word-break: break-all;
+                background: rgba(0,0,0,.58);
                 p{
                     height:120px;
                 }
@@ -166,10 +170,10 @@ export default {
             margin-top:-30px;
             left:50%;
             &.prev{
-                margin-left: -470px;
+                margin-left: -48%;
             }
             &.next{
-                margin-left:450px;
+                margin-left:38%;
             }
         }
     }

@@ -51,7 +51,7 @@ export default {
             width:7.5rem;
             height:.82rem*@diff;
             position: absolute;
-            top:1.7rem*@diff;
+            top:1.85rem*@diff;
             left:50%;
             margin-left:-3.75rem;
         }
@@ -60,11 +60,11 @@ export default {
             font-size: .3rem*@diff2;
             text-align: center;
             width:100%;
-            top:2.6rem*@diff;
+            top:2.5rem*@diff;
         }
         ul{
             position: absolute;
-            top:3.11rem*@diff;
+            top:2.8rem*@diff;
             width:3.5rem;
             left:50%;
             margin-left: -1.74rem;

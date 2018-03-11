@@ -5,7 +5,8 @@
         <div class="content" v-if="formtype">
             <label for="type">素材类型</label>
             <input type="radio" name="type" value="1" v-model="form.type">图片
-            <input type="radio" name="type" value="0" v-model="form.type">视频
+            <input type="radio" name="type" value="2" v-model="form.type">动图
+            <input type="radio" name="type" value="3" v-model="form.type">视频
             <br/>
             <input type="file" name="" id="" multiple @change="filechange">
             <br/>
@@ -81,7 +82,7 @@ export default {
     }
     .content{
         width:600px;
-        height:600px;
+        height:400px;
         position: fixed;
         top:50%;
         left:50%;
@@ -91,7 +92,7 @@ export default {
         background-color: #fff;
         .pic-wrap{
             background-color: #eee;
-            max-height:450px;
+            max-height:300px;
             overflow: scroll;
             .upload-pic{
                 width:100px;
@@ -100,10 +101,14 @@ export default {
         }
     }
     #submit{
+        position:absolute;
         display: block;
         width:80px;
         height:40px;
         font-size: 20px;
         margin-left: 30px;
+        top:10px;
+        right:10px;
+        border:1px solid #000;
     }
 </style>

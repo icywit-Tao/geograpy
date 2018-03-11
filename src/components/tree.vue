@@ -12,10 +12,12 @@
                 <tree :tree="subtree" :active="active" :dictionary="dictionary" :addSession="addSession" :delSession="delSession" :toggle="toggle" v-for="subtree in treeNode.children" :key="subtree"/>
             </template>
             <template v-else>
-                <li v-for="pic in treeNode.children" class="pic-wrap" :key="pic.file">
-                    <img :src="`/dist/pics/${treeNode.id}/${pic.file}`" class="upload-pic"/>
-                    <span>{{pic.desc}}</span>
-                </li>
+                <template v-for="pic in treeNode.children">
+                    <li class="pic-wrap">
+                        <img :src="`/dist/pics/${treeNode.id}/${pic.file}`" class="upload-pic"/>
+                        <span>{{pic.desc}}</span>
+                    </li>
+                </template>
             </template>
         </div>
     </div>

@@ -14,11 +14,16 @@
             <div class="nav-wrap">
                 <navbar :navs="navs"></navbar>
             </div>
-
-            <div class="pic-wrap" >
-                <pictures :pics="pics" v-if="lastNode"></pictures>
-                <img class="nothing" src="../assets/nothing.png" alt="" v-else>
+            <div class="tabs-wrap" v-if="lastNode">
+                <tabs :tabInfo="tabInfo" :activeType="activeType" :change="tabChange" ></tabs>
             </div>
+            <div class="pic-wrap last" v-if="lastNode"> 
+                <pictures :pics="pics" ></pictures>
+            </div>
+            <div class="pic-wrap" v-else> 
+                <img class="nothing" src="../assets/nothing.png" alt="" >
+            </div>
+            
             
             
             
@@ -34,6 +39,7 @@ import navbar from '../components/navbar';
 import gohome from '../components/gohome';
 import left from '../components/left.vue';
 import pictures from '../components/pictures';
+import tabs from '../components/tabs';
 import {fetch} from '../utils/fetch';
 export default {
     data(){
@@ -42,7 +48,12 @@ export default {
             navs:[],
             pics:{},
             active:[],
-            lastNode:''
+            lastNode:'',
+            activeType:'1',
+            picInfo:{
+                id:'',
+                list:'',
+            }
         }
     },
     created(){
@@ -57,6 +68,12 @@ export default {
             this.active =global.active;
             this.lastNode=this.last
             this.pics=this.picInfo;
+            this.lastNode &&this.tabChange('1');
+        },
+        tabChange(type){
+            this.activeType = type;
+            this.picInfo.id = this.active[0];
+            this.picInfo.list = this.tabInfo[this.activeType];
         }
     },
     computed:{
@@ -69,18 +86,29 @@ export default {
         last(){
             return this.category[this.active[0]].childrentype !=='1'
         },
-        picInfo(){ 
-            return {
-                id:this.active[0],
-                list:this.category[this.active[0]].children
-            };
+        tabInfo(){
+            let tabs={};
+            if(this.lastNode){
+                let id = this.active[0];
+                let list = this.category[this.active[0]].children;
+                for ( let pic of list){
+                    let type =pic.type;
+                    if(tabs[type]){
+                        tabs[type].push(pic);
+                    }else{
+                        tabs[type] =[pic];
+                    }
+                }
+            }
+            return tabs;
         }
     },
     components:{
         navbar,
         gohome,
         pictures,
-        left
+        left,
+        tabs
     }
 }
 </script>
@@ -122,7 +150,7 @@ export default {
                 top:0;
                 .left-content{
                     padding: 10px 0;
-                    height:3rem;
+                    height:2.5rem;
                     overflow: scroll;
                 }
             }
@@ -131,18 +159,26 @@ export default {
                 left:1.53rem;
                 top:.08rem;
             }
+            .tabs-wrap{
+                position: absolute;
+                left:1.53rem;
+                top:.38rem;
+            }
             .pic-wrap{
+                &.last{
+                    margin-top:30px;
+                }
                 position: absolute;
                 left:1.53rem;
                 top:.32rem;
-                height:3rem;
+                height:2.3rem;
                 overflow-y:scroll;
                 width:6rem;
                 .nothing{
                     display: block;
-                    margin: .2rem 0 0 1.2rem;
-                    width:4rem;
-                    height:2.8rem;
+                    margin: .2rem 0 0 1.6rem;
+                    width:3rem;
+                    height:2rem;
                 }
             }
         }

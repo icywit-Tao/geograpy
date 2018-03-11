@@ -33,11 +33,12 @@ export default {
 <style lang="less" scoped>
     ul{
         // background: rgba(0,0,0,.35);
-        font-size: 20px;
-        line-height: 20px;
+        
         li{
             float: left;
-            padding: 5px 8px;
+            font-size: 20px;
+            line-height: 30px;
+            padding: 0 8px;
             color: #ccc;
             &.active{
                 color: #321;

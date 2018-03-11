@@ -46,6 +46,7 @@ export default {
         
     }
     .category-sub{
+        overflow: hidden;
         padding-left:20px;
     }
     .add{

@@ -9,13 +9,16 @@
         <div v-if="active===treeNode.id&&!debug">11111</div>
         <div class="category-sub" v-if="treeNode.isShow||debug">
             <template v-if="treeNode.childrentype==='1'">
-                <tree :tree="subtree" :active="active" :dictionary="dictionary" :addSession="addSession" :delSession="delSession" :toggle="toggle" v-for="subtree in treeNode.children" :key="subtree"/>
+                <tree :tree="subtree" :active="active" :dictionary="dictionary" :delResource="delResource" :addSession="addSession" :delSession="delSession" :toggle="toggle" v-for="subtree in treeNode.children" :key="subtree"/>
             </template>
             <template v-else>
                 <template v-for="pic in treeNode.children">
                     <li class="pic-wrap">
                         <img :src="`/dist/pics/${treeNode.id}/${pic.file}`" class="upload-pic"/>
+                        <br/>
                         <span>{{pic.desc}}</span>
+                        <br/>
+                        <span class="add" @click="delResource(treeNode.id,pic.file)">删除</span>
                     </li>
                 </template>
             </template>
@@ -30,7 +33,7 @@ export default {
           debug:1,
       }
   },
-  props:['tree','dictionary','addSession','delSession','toggle','active'],
+  props:['tree','dictionary','addSession','delSession','toggle','active','delResource'],
   computed:{
       treeNode(){
           return this.dictionary[this.tree];

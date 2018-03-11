@@ -1,6 +1,6 @@
 <template>
     <div class="category-container">
-        <tree v-if="category" :mask="1" :active="active":tree="tree" :toggle="toggle" :dictionary="category" :addSession="addSession" :delSession="delSession"></tree>
+        <tree v-if="category" :mask="1" :active="active":tree="tree" :toggle="toggle" :dictionary="category" :delResource="delResource" :addSession="addSession" :delSession="delSession"></tree>
         <addform :isShow="isShow" :addform="addform" :formtype="formtype"></addform>
         <div class="width-height">{{width}}*{{height}}</div>
     </div>
@@ -36,6 +36,14 @@ export default {
         addSession(id,type){
             this.isShow = id;
             this.formtype = type;
+        },
+        delResource(id,file){
+            fetch('/api/delResource',null,{
+                id: id,
+                file:file
+            }).then(res=>{
+                this.category = res;
+            })
         },
         delSession(id){
             fetch('/api/delSession',null,{

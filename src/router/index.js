@@ -12,6 +12,9 @@ const router = new Router({
         title:'南京师范大学中学地理教学图像库'
       }
     },{
+      path:'/source',
+      component:()=>import('../views/source.vue'),
+    },{
       path:'/admin',
       component:()=>import('../views/admin.vue'),
     },
@@ -46,7 +49,7 @@ function generateLink(category,key,base){
 }
 router.beforeEach((to,from,next)=>{
   let {grade,session}=to.params;
-  if(to.path==='/'|| to.path ==='/admin'&&global.debug){
+  if(to.path==='/'|| to.path ==='/source'|| to.path ==='/admin'&&global.debug){
     next();
   }else{
     new Promise(res=>{

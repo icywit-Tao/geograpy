@@ -22,11 +22,7 @@
             </div>
             <div class="pic-wrap" v-else> 
                 <img class="nothing" src="../assets/nothing.png" alt="" >
-            </div>
-            
-            
-            
-            
+            </div> 
         </div>
         <div class="gohome-wrap">
             <gohome></gohome>

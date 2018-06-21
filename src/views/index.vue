@@ -15,6 +15,9 @@
                 </router-link>
             </li>   
         </ul>
+        <div class="source-wrap">
+            <router-link to="/source" class="source">图片来源</router-link>
+        </div>
     </div>
     
 </template>
@@ -112,6 +115,20 @@ export default {
                         width:1.8rem;
                     }
                 }
+            }
+        }
+        .source-wrap{
+            position: fixed;
+            right:.25rem;
+            bottom:10px;
+            width:120px;
+            background-color: rgba(0,0,0,.6);
+            overflow: hidden;
+            .source{
+                display: block;
+                padding: 5px;
+                font-size: 26px;
+                color:#dcd;
             }
         }
     }
